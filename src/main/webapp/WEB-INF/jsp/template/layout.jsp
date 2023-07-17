@@ -18,7 +18,7 @@
 		<header class="px-4">
 			<jsp:include page="../include/header.jsp"/>
 		</header>
-		<section class="contents bg-info">
+		<section class="contents">
 			<jsp:include page="../${view}.jsp"/>
 		</section>
 		<footer>
