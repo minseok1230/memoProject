@@ -19,10 +19,12 @@ public class PostBO {
 			return postMapper.selectPostListByUserId(userId);
 		}
 		
+		// 게시물글 db insert
 		public int addPost(int userId, String subject, String content, MultipartFile file) {
 			
 			// 이미지가 있으면 업로드 후 imagePath 받아옴
 			String imagePath = null;
-			return postMapper.insertPost(userId, subject, content, file);
+			return postMapper.insertPost(userId, subject, content, imagePath);
 		}
+		
 }

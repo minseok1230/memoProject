@@ -3,6 +3,7 @@ package com.memo.post.dao;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -14,5 +15,9 @@ public interface PostMapper {
 	
 	public List<Post> selectPostListByUserId(int userId); 
 	
-	public int insertPost(int userId, String subject, String content, MultipartFile file);
+	public int insertPost(
+			@Param("userId") int userId, 
+			@Param("subject") String subject, 
+			@Param("content") String content, 
+			@Param("imagePath") String imagePath);
 }
