@@ -28,6 +28,7 @@ public class UserController {
 	 * @param model
 	 * @return
 	 */
+	// /user/sign_in_view
 	@GetMapping("/sign_in_view")
 	public String signInView(Model model) {
 		model.addAttribute("view", "user/signIn");
