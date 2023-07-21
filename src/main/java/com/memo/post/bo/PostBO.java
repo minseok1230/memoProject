@@ -10,6 +10,9 @@ import com.memo.common.FileManagerService;
 import com.memo.post.dao.PostMapper;
 import com.memo.post.domain.Post;
 
+import lombok.ToString;
+
+@ToString
 @Service
 public class PostBO {
 
@@ -34,6 +37,11 @@ public class PostBO {
 			}
 			
 			return postMapper.insertPost(userId, subject, content, imagePath);
+		}
+		
+		// 상세 게시글 가져오기 
+		public Post getPostByPostIdAndUserId(int postId, int userId) {
+			return postMapper.selectPostByPostIdAndUserId(postId, userId);
 		}
 		
 }
