@@ -95,8 +95,41 @@ $(document).ready(function(){
 			}
 		});
 	});
+	
+	
+	// 삭제 버튼 클릭
+	$('#deleteBtn').on('click', function(){
+		//alert("ddd");
+		
+		let postId = ${post.id};
+		
+		$.ajax({
+			// request
+			type: "delete"
+			, url : "/post/delete"
+			, data : {"postId" : postId}
+			
+			// response
+			, success:function(data){
+				if (data.code == 1){
+					alert("메모가 삭제되었습니다.")
+					location.href = "/post/post_list_view";
+				} else{
+					alert(data.errorMessage);
+				}
+			}
+			
+			, error: function(request, status, error){
+				alert("메모 삭제 실패했습니다. 관리자 문의 바랍니다.");
+			}
+		});
+		
+		
+	});
 });
-</script>
+</script> 
+
+
 
 
 

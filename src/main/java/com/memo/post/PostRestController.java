@@ -6,6 +6,7 @@ import java.util.Map;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -51,9 +52,18 @@ public class PostRestController {
 		return result;
 	}
 	
+	/**
+	 * 메모 수정하기
+	 * @param postId
+	 * @param subject
+	 * @param content
+	 * @param file
+	 * @param session
+	 * @return
+	 */
 	@PutMapping("/update")
 	public Map<String, Object> update(
-			@RequestParam("postId") String postId,
+			@RequestParam("postId") int postId,
 			@RequestParam("subject") String subject,
 			@RequestParam("content") String content,
 			@RequestParam(value = "file", required = false) MultipartFile file,
@@ -65,7 +75,7 @@ public class PostRestController {
 		
 		
 		// BO update
-		postBO.updatePost(userId, userLoginId, userId, subject, content, file);
+		postBO.updatePost(userId, userLoginId, postId, subject, content, file);
 		
 		// 응답
 		Map<String, Object> result = new HashMap<>();
@@ -73,6 +83,27 @@ public class PostRestController {
 		result.put("result", "성공");
 		return result;
 	}
+	
+	// 메모 삭제하기
+	@DeleteMapping("/delete")
+	public Map<String, Object> delete(
+			@RequestParam("postId") int postId,
+			HttpSession session){
+		
+		// 세션에서 userId, userLoginId
+		int userId =  (int)session.getAttribute("userId");
+		
+		// BO delete
+		postBO.deletePost(postId, userId);
+		
+		// 응답
+		Map<String, Object> result = new HashMap<>();
+		result.put("code", 1);
+		result.put("result", "성공");
+		return result;
+	}
+	
+	
 	
 	
 }
