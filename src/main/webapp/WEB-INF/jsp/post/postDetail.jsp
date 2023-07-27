@@ -5,7 +5,7 @@
 	<div class="w-50">
 		<h1>글상세</h1>
 		<input type="text" id="subject" class="form-control" placeholder="제목을 입력하세요" value="${post.subject}">		
-		<textarea id="content" class="form-control" rows="10" placeholder="내용을 입력하세요">${post.content}s</textarea>
+		<textarea id="content" class="form-control" rows="10" placeholder="내용을 입력하세요">${post.content}</textarea>
 		
 		<%-- 이미지가 있을때만 이미지 영역 추가 --%>
 		<c:if test="${not empty post.imagePath}">
@@ -31,6 +31,7 @@
 
 <script>
 $(document).ready(function(){
+	
 	// 수정 버튼 클릭
 	$('#updateBtn').on('click', function(){
 		//alert("dddd");

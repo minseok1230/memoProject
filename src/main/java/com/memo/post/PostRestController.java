@@ -53,7 +53,7 @@ public class PostRestController {
 	}
 	
 	/**
-	 * 메모 수정하기
+	 * 글수정 API
 	 * @param postId
 	 * @param subject
 	 * @param content
@@ -94,7 +94,7 @@ public class PostRestController {
 		int userId =  (int)session.getAttribute("userId");
 		
 		// BO delete
-		postBO.deletePost(postId, userId);
+		postBO.deletePostByPostIdAndUserId(postId, userId);
 		
 		// 응답
 		Map<String, Object> result = new HashMap<>();

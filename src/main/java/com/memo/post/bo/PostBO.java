@@ -49,6 +49,15 @@ public class PostBO {
 		}
 		
 		
+		/**
+		 * 글 수정
+		 * @param userId
+		 * @param userLoginId
+		 * @param postId
+		 * @param subject
+		 * @param content
+		 * @param file
+		 */
 		/* 글(memo) 수정 */
 		public void updatePost(int userId, String userLoginId, int postId, String subject, String content, MultipartFile file) {
 			
@@ -79,12 +88,15 @@ public class PostBO {
 			postMapper.updatePostByPostIdAndUserId(postId, userId, subject, content, imagePath);
 		}
 		
+		
+		
 		/* 글(memo) 삭제 */
-		public void deletePost(int postId, int userId) {
+		public void deletePostByPostIdAndUserId(int postId, int userId) {
 			// 1. 삭제 대상인 기존 글을 가져와본다 select
 			Post post = postMapper.selectPostByPostIdAndUserId(postId, userId);
 			if (post == null) {
 				logger.warn("###[글 삭제] post is null. postId:{}, userId:{}", postId, userId);
+				return;
 			}
 			
 			// 2. 기존 이미지 삭제
