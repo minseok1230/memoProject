@@ -23,8 +23,37 @@
 			`post`
 		WHERE
 			`userId` = #{userId}
-		ORDER BY
-			`id` DESC;
+		<!-- 첫화면 -->
+		<if test="direction == null"> 
+		ORDER BY `id` DESC
+		</if>
+		
+		<!-- 다음 화면 -->
+		<if test="direction == 'next'">
+		<![CDATA[
+		AND `id` < #{standardId}				
+		]]>
+		ORDER BY `id` DESC
+		</if>
+		
+		<if test="direction == 'prev'">
+		<![CDATA[
+		AND `id` > #{standardId}				
+		]]>
+		</if>
+		
+		LIMIT ${limit}
+ 	</select>
+ 	
+ 	<select id="selectPostIdByUserIdAndSort" parameterType="map" resultType="int">
+ 	 	SELECT 
+ 	 		`id`
+ 	 	FROM 
+ 	 	 	`post`
+ 	 	WHERE 
+ 	 		`userId` = #{userId}
+ 	 	ORDER BY `id` ${sort}
+ 	 	LIMIT 1
  	</select>
  	
  	<insert id="insertPost" parameterType="map">
